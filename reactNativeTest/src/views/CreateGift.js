@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import {
   SafeAreaView,
@@ -10,35 +10,10 @@ import {
   TextInput,
 } from 'react-native';
 
-const CreateGift = () => {
-
-  const seedGiftData = [
-    {
-      who: "Chris",
-      gift: "Drum Sticks",
-      plannedDollars: "20",
-      spentDollars: "13",
-      purchasedStatus: false,
-      packagedStatus: false
-    },
-    {
-      who: "Andrew",
-      gift: "Some Sleep",
-      plannedDollars: "200",
-      spentDollars: "4000",
-      purchasedStatus: false,
-      packagedStatus: false
-    }
-  ]
-
-  const [gifts, setGifts] = useState(seedGiftData)
+const CreateGift = ({ navigation }) => {
 
   function handleGiftSubmission(values) {
-    if (!gifts) {
-      setGifts([values])
-    } else {
-      setGifts([...gifts, values])
-    }
+    navigation.navigate('Planner', { gifts: values })
   }
 
   return (
