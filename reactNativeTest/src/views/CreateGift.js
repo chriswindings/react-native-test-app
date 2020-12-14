@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Formik } from 'formik';
+import uuid from 'react-native-uuid';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,42 +11,18 @@ import {
   TextInput,
 } from 'react-native';
 
-const CreateGift = () => {
-
-  const seedGiftData = [
-    {
-      who: "Chris",
-      gift: "Drum Sticks",
-      plannedDollars: "20",
-      spentDollars: "13",
-      purchasedStatus: false,
-      packagedStatus: false
-    },
-    {
-      who: "Andrew",
-      gift: "Some Sleep",
-      plannedDollars: "200",
-      spentDollars: "4000",
-      purchasedStatus: false,
-      packagedStatus: false
-    }
-  ]
-
-  const [gifts, setGifts] = useState(seedGiftData)
+const CreateGift = ({ navigation }) => {
 
   function handleGiftSubmission(values) {
-    if (!gifts) {
-      setGifts([values])
-    } else {
-      setGifts([...gifts, values])
-    }
+    const newGift = { id: uuid.v1(), ...values }
+    navigation.navigate('Planner', { createGift: newGift })
   }
 
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
         <Formik
-          initialValues={{ who: '', gift: '', plannedDollars: '', spentDollars: '', purchasedStatus: false, packagedStatus: false }}
+          initialValues={{who: '', gift: '', plannedDollars: '', spentDollars: '', purchasedStatus: false, packagedStatus: false }}
           onSubmit={handleGiftSubmission}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
