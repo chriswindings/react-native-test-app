@@ -15,7 +15,6 @@ const CreateGift = ({ navigation }) => {
 
   function handleGiftSubmission(values) {
     const newGift = { id: uuid.v1(), ...values }
-    console.log(newGift)
     navigation.navigate('Planner', { createGift: newGift })
   }
 

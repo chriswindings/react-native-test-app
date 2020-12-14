@@ -44,7 +44,7 @@ const ShowGifts = ({ navigation, route }) => {
   useEffect(() => {
 
     if (route.params?.createGift) {
-      createGift(route.params?.gift)
+      createGift(route.params?.createGift)
       route.params.createGift = false
     }
 
@@ -52,7 +52,7 @@ const ShowGifts = ({ navigation, route }) => {
 
   useEffect(() => {
     if (route.params?.updateGift) {
-      updateGift(route.params?.gift)
+      updateGift(route.params?.updateGift)
       route.params.updateGift = false
     }
 
