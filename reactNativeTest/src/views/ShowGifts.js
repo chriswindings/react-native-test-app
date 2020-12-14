@@ -27,20 +27,36 @@ const ShowGifts = ({ navigation, route }) => {
 
   const [gifts, setGifts] = useState(initialGifts)
 
-  const updateGifts = (gift) => {
+  const createGift = (gift) => {
+    setGifts((gifts) => {
+      return [...gifts, gift]
+    })
+  }
+
+  const updateGift = (gift) => {
     const updatedGifts = gifts.map((existingGift) => { 
+      console.log(existingGift.id, gift.id)
      return existingGift.id === gift.id ? { ...gift } : { ...existingGift }
     })
-
     setGifts([...updatedGifts])
   }
   
   useEffect(() => {
-    if (route.params?.gift) {
-      updateGifts(route.params.gift)
-      route.params.gifts = false
+
+    if (route.params?.createGift) {
+      createGift(route.params?.gift)
+      route.params.createGift = false
     }
-  }, [route.params?.gift])
+
+  }, [route.params?.createGift])
+
+  useEffect(() => {
+    if (route.params?.updateGift) {
+      updateGift(route.params?.gift)
+      route.params.updateGift = false
+    }
+
+  }, [route.params?.updateGift])
 
   return (
     <SafeAreaView>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
+import uuid from 'react-native-uuid';
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,14 +14,16 @@ import {
 const CreateGift = ({ navigation }) => {
 
   function handleGiftSubmission(values) {
-    navigation.navigate('Planner', { gifts: values })
+    const newGift = { id: uuid.v1(), ...values }
+    console.log(newGift)
+    navigation.navigate('Planner', { createGift: newGift })
   }
 
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
         <Formik
-          initialValues={{ who: '', gift: '', plannedDollars: '', spentDollars: '', purchasedStatus: false, packagedStatus: false }}
+          initialValues={{who: '', gift: '', plannedDollars: '', spentDollars: '', purchasedStatus: false, packagedStatus: false }}
           onSubmit={handleGiftSubmission}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (

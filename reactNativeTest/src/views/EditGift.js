@@ -8,12 +8,12 @@ const EditGift = ({ navigation, route }) => {
   const { gift } = route.params
 
   const handleGiftEdit = (values) => {
-    navigation.navigate('Planner', { gifts: {id: gift.id, ...values} })
+    navigation.navigate('Planner', { updateGift: {id: gift.id, ...values} })
   }
 
   return (
     <Formik
-      initialValues={{ who: gift.who, gift: gift.gift, plannedDollars: gift.plannedDollars, spentDollars: gift.spentDollars, purchasedStatus: gift.purchasedStatus, packagedStatus: gift.packagedStatus }}
+      initialValues={{ who: gift.who, id: gift.id, gift: gift.gift, plannedDollars: gift.plannedDollars, spentDollars: gift.spentDollars, purchasedStatus: gift.purchasedStatus, packagedStatus: gift.packagedStatus }}
       onSubmit={handleGiftEdit}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
